@@ -286,7 +286,7 @@ app.post('/submit', async (req, res) => {
 });
 
 app.get('/jumia', (req, res) => {
-  fs.readFile('views/jumia.json', (err, data) => {
+  fs.readFile('data/jumia.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -297,7 +297,7 @@ app.get('/jumia', (req, res) => {
   });
 });
 app.get('/electroplanet', (req, res) => {
-  fs.readFile('views/electroplanet.json', (err, data) => {
+  fs.readFile('data/electroplanet.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -308,7 +308,7 @@ app.get('/electroplanet', (req, res) => {
   });
 });
 app.get('/marjane', (req, res) => {
-  fs.readFile('views/marjane.json', (err, data) => {
+  fs.readFile('data/marjane.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -319,7 +319,7 @@ app.get('/marjane', (req, res) => {
   });
 });
 app.get('/marocannonce', (req, res) => {
-  fs.readFile('views/marocannonces.json', (err, data) => {
+  fs.readFile('data/marocannonces.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -330,7 +330,7 @@ app.get('/marocannonce', (req, res) => {
   });
 });
 app.get('/avito', (req, res) => {
-  fs.readFile('views/avito.json', (err, data) => {
+  fs.readFile('data/avito.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
