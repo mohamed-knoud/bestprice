@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 function data(req){
   let data = []
 
-  puppeteer.launch({ headless: 'new' ,timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' ,timeout: 60000,args: ['--no-sandbox', '--disable-setuid-sandbox']}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.marjane.ma/search/${req.body.query}`, { timeout: 60000 })
@@ -71,7 +71,7 @@ function data(req){
     // console.log(`All done, check the screenshot. marjane ✨`)
 
   })
-  puppeteer.launch({ headless: 'new'  , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new'  , timeout: 60000,args: ['--no-sandbox', '--disable-setuid-sandbox']}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.electroplanet.ma/recherche?q=${req.body.query}`, { timeout: 60000 })
@@ -111,7 +111,7 @@ function data(req){
 
   })
 
-  puppeteer.launch({ headless: 'new'  , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new'  ,args: ['--no-sandbox', '--disable-setuid-sandbox'], timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.marocannonces.com/maroc.html?kw=${req.body.query}`, { timeout: 60000 })
@@ -153,7 +153,7 @@ function data(req){
 
   })
 
-  puppeteer.launch({ headless: 'new'  , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new'  ,args: ['--no-sandbox', '--disable-setuid-sandbox'], timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.avito.ma/fr/maroc/${req.body.query}`, { timeout: 60000 })
@@ -193,7 +193,7 @@ function data(req){
 
   })
 
-  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' ,args: ['--no-sandbox', '--disable-setuid-sandbox'], timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.jumia.ma/catalog/?q=${req.body.query}`, { timeout: 60000 })
