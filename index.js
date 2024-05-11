@@ -61,7 +61,7 @@ function data(req){
         }).filter((product) => product !== null);
      })
     await browser.close()
-    fs.writeFile('data/marjane.json', JSON.stringify(products), (err) => {
+    fs.writeFile('views/marjane.json', JSON.stringify(products), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -99,7 +99,7 @@ function data(req){
       }).filter((product) => product !== null);
     }
     );
-    fs.writeFile('data/electroplanet.json', JSON.stringify(products1), (err) => {
+    fs.writeFile('views/electroplanet.json', JSON.stringify(products1), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -143,7 +143,7 @@ function data(req){
     }
       
     );
-    fs.writeFile('data/marocannonces.json', JSON.stringify(products2), (err) => {
+    fs.writeFile('views/marocannonces.json', JSON.stringify(products2), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -184,7 +184,7 @@ function data(req){
     }
       
     );
-    fs.writeFile('data/avito.json', JSON.stringify(products3), (err) => {
+    fs.writeFile('views/avito.json', JSON.stringify(products3), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -226,7 +226,7 @@ function data(req){
     );
     
     
-  fs.writeFile('data/jumia.json', JSON.stringify(products4), (err) => {
+  fs.writeFile('views/jumia.json', JSON.stringify(products4), (err) => {
     if (err) throw err;
     console.log('File saved');
   });
@@ -286,7 +286,7 @@ app.post('/submit', async (req, res) => {
 });
 
 app.get('/jumia', (req, res) => {
-  fs.readFile('data/jumia.json', (err, data) => {
+  fs.readFile('views/jumia.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -297,7 +297,7 @@ app.get('/jumia', (req, res) => {
   });
 });
 app.get('/electroplanet', (req, res) => {
-  fs.readFile('data/electroplanet.json', (err, data) => {
+  fs.readFile('views/electroplanet.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -308,7 +308,7 @@ app.get('/electroplanet', (req, res) => {
   });
 });
 app.get('/marjane', (req, res) => {
-  fs.readFile('data/marjane.json', (err, data) => {
+  fs.readFile('views/marjane.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -319,7 +319,7 @@ app.get('/marjane', (req, res) => {
   });
 });
 app.get('/marocannonce', (req, res) => {
-  fs.readFile('data/marocannonces.json', (err, data) => {
+  fs.readFile('views/marocannonces.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
@@ -330,7 +330,7 @@ app.get('/marocannonce', (req, res) => {
   });
 });
 app.get('/avito', (req, res) => {
-  fs.readFile('data/avito.json', (err, data) => {
+  fs.readFile('views/avito.json', (err, data) => {
     if (err) {
       console.error('Error reading JSON file:', err);
       res.status(500).send('Internal Server Error');
