@@ -61,7 +61,7 @@ function data(req){
         }).filter((product) => product !== null);
      })
     await browser.close()
-    fs.writeFile('views/marjane.json', JSON.stringify(products), (err) => {
+    fs.writeFile('data/marjane.json', JSON.stringify(products), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -99,7 +99,7 @@ function data(req){
       }).filter((product) => product !== null);
     }
     );
-    fs.writeFile('views/electroplanet.json', JSON.stringify(products1), (err) => {
+    fs.writeFile('data/electroplanet.json', JSON.stringify(products1), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -143,7 +143,7 @@ function data(req){
     }
       
     );
-    fs.writeFile('views/marocannonces.json', JSON.stringify(products2), (err) => {
+    fs.writeFile('data/marocannonces.json', JSON.stringify(products2), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -184,7 +184,7 @@ function data(req){
     }
       
     );
-    fs.writeFile('views/avito.json', JSON.stringify(products3), (err) => {
+    fs.writeFile('data/avito.json', JSON.stringify(products3), (err) => {
       if (err) throw err;
       console.log('File saved');
     });
@@ -226,7 +226,7 @@ function data(req){
     );
     
     
-  fs.writeFile('views/jumia.json', JSON.stringify(products4), (err) => {
+  fs.writeFile('data/jumia.json', JSON.stringify(products4), (err) => {
     if (err) throw err;
     console.log('File saved');
   });
@@ -237,11 +237,11 @@ function data(req){
   return data;
 }
 app.post('/submit', async (req, res) => {
-  const url_avito = 'views/avito.json';
-  const url_jumia = 'views/jumia.json';
-  const url_marjane = 'views/marjane.json';
-  const url_electroplanet = 'views/electroplanet.json';
-  const url_marocannonce = 'views/marocannonces.json';
+  const url_avito = 'data/avito.json';
+  const url_jumia = 'data/jumia.json';
+  const url_marjane = 'data/marjane.json';
+  const url_electroplanet = 'data/electroplanet.json';
+  const url_marocannonce = 'data/marocannonces.json';
   fs.unlink(url_avito, (err) => {
     if (err) {
       console.error('Error deleting file:', err);
