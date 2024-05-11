@@ -10,7 +10,7 @@ const fs = require('fs');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
-// const {executablePath} = require('puppeteer');
+const {executablePath} = require('puppeteer');
 
 
 
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 function data(req){
   let data = []
 
-  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' , executablePath , executablePath(),timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.marjane.ma/search/${req.body.query}`, { timeout: 60000 })
