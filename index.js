@@ -1,4 +1,6 @@
 // puppeteer-extra is a drop-in replacement for puppeteer,
+// process.env.PUPPETEER_CACHE_DIR = '/opt/render/project/puppeteer';
+
 // it augments the installed puppeteer with plugin functionality
 const puppeteer = require('puppeteer-extra')
 // const fs = require('fs');
@@ -8,6 +10,7 @@ const fs = require('fs');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 puppeteer.use(StealthPlugin())
 
+// const {executablePath} = require('puppeteer');
 
 
 
@@ -30,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 function data(req){
   let data = []
 
-  puppeteer.launch({ headless: true , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.marjane.ma/search/${req.body.query}`, { timeout: 60000 })
@@ -60,7 +63,7 @@ function data(req){
     await browser.close()
     fs.writeFile('views/marjane.json', JSON.stringify(products), (err) => {
       if (err) throw err;
-      // console.log('File saved');
+      console.log('File saved');
     });
 
     // console.log(products)
@@ -68,7 +71,7 @@ function data(req){
     // console.log(`All done, check the screenshot. marjane ✨`)
 
   })
-  puppeteer.launch({ headless: true , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.electroplanet.ma/recherche?q=${req.body.query}`, { timeout: 60000 })
@@ -98,7 +101,7 @@ function data(req){
     );
     fs.writeFile('views/electroplanet.json', JSON.stringify(products1), (err) => {
       if (err) throw err;
-      // console.log('File saved');
+      console.log('File saved');
     });
     await browser.close()
         
@@ -108,7 +111,7 @@ function data(req){
 
   })
 
-  puppeteer.launch({ headless: true , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.marocannonces.com/maroc.html?kw=${req.body.query}`, { timeout: 60000 })
@@ -142,7 +145,7 @@ function data(req){
     );
     fs.writeFile('views/marocannonces.json', JSON.stringify(products2), (err) => {
       if (err) throw err;
-      // console.log('File saved');
+      console.log('File saved');
     });
     // console.log(products2)
     await browser.close()
@@ -150,7 +153,7 @@ function data(req){
 
   })
 
-  puppeteer.launch({ headless: true , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.avito.ma/fr/maroc/${req.body.query}`, { timeout: 60000 })
@@ -183,20 +186,20 @@ function data(req){
     );
     fs.writeFile('views/avito.json', JSON.stringify(products3), (err) => {
       if (err) throw err;
-      // console.log('File saved');
+      console.log('File saved');
     });
     await browser.close()
     // console.log(`All done, check the screenshot. for avito`)
 
   })
 
-  puppeteer.launch({ headless: true , timeout: 60000}).then(async browser => {
+  puppeteer.launch({ headless: 'new' , timeout: 60000}).then(async browser => {
     // console.log('Running tests..')
     const page = await browser.newPage()
     await page.goto(`https://www.jumia.ma/catalog/?q=${req.body.query}`, { timeout: 60000 })
     await page.waitForTimeout(5000)
     // await page.screenshot({ path: 'jumia.png', fullPage: true })
-    const products4 = await page.$$eval('article.prd._fb._spn.c-prd.col a.core', (elements) =>{
+    const products4 = await page.$$eval('article.prd._fb.col.c-prd a.core', (elements) =>{
       
       // elements.forEach(e=>{
       //   console.log(e)
@@ -225,7 +228,7 @@ function data(req){
     
   fs.writeFile('views/jumia.json', JSON.stringify(products4), (err) => {
     if (err) throw err;
-    // console.log('File saved');
+    console.log('File saved');
   });
     await browser.close()
     // console.log(`All done, check the screenshot. for jumia`)
@@ -241,47 +244,113 @@ app.post('/submit', async (req, res) => {
   const url_marocannonce = 'views/marocannonces.json';
   fs.unlink(url_avito, (err) => {
     if (err) {
-      // console.error('Error deleting file:', err);
+      console.error('Error deleting file:', err);
       return;
     }
-    // console.log('File deleted successfully');
+    console.log('File deleted successfully');
   });
   fs.unlink(url_jumia, (err) => {
     if (err) {
-      // console.error('Error deleting file:', err);
+      console.error('Error deleting file:', err);
       return;
     }
-    // console.log('File deleted successfully');
+    console.log('File deleted successfully');
   });
   fs.unlink(url_marjane, (err) => {
     if (err) {
-      // console.error('Error deleting file:', err);
+      console.error('Error deleting file:', err);
       return;
     }
-    // console.log('File deleted successfully');
+    console.log('File deleted successfully');
   });
   fs.unlink(url_electroplanet, (err) => {
     if (err) {
-      // console.error('Error deleting file:', err);
+      console.error('Error deleting file:', err);
       return;
     }
-    // console.log('File deleted successfully');
+    console.log('File deleted successfully');
   });
   fs.unlink(url_marocannonce, (err) => {
     if (err) {
-      // console.error('Error deleting file:', err);
+      console.error('Error deleting file:', err);
       return;
     }
-    // console.log('File deleted successfully');
+    console.log('File deleted successfully');
   });
       
     const datas = data(req);
-    let variable = 1
     res.render('index', { variable: 1 , query:req.body.query});
       
   
 
 });
+
+app.get('/jumia', (req, res) => {
+  fs.readFile('views/jumia.json', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  });
+});
+app.get('/electroplanet', (req, res) => {
+  fs.readFile('views/electroplanet.json', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  });
+});
+app.get('/marjane', (req, res) => {
+  fs.readFile('views/marjane.json', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  });
+});
+app.get('/marocannonce', (req, res) => {
+  fs.readFile('views/marocannonces.json', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  });
+});
+app.get('/avito', (req, res) => {
+  fs.readFile('views/avito.json', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
