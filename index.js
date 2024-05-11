@@ -237,11 +237,11 @@ function data(req){
   return data;
 }
 app.post('/submit', async (req, res) => {
-  const url_avito = 'data/avito.json';
-  const url_jumia = 'data/jumia.json';
-  const url_marjane = 'data/marjane.json';
-  const url_electroplanet = 'data/electroplanet.json';
-  const url_marocannonce = 'data/marocannonces.json';
+  const url_avito = 'views/avito.json';
+  const url_jumia = 'views/jumia.json';
+  const url_marjane = 'views/marjane.json';
+  const url_electroplanet = 'views/electroplanet.json';
+  const url_marocannonce = 'views/marocannonces.json';
   fs.unlink(url_avito, (err) => {
     if (err) {
       console.error('Error deleting file:', err);
